@@ -1,10 +1,13 @@
-import React from 'react';
+import React , { useContext} from 'react';
 import { Link } from 'react-router-dom';
+import { UserContext} from '../context/UserContext';
 
 export const NavBar = () => {
+  
+  const {user} = useContext(UserContext);
   return (
     <nav className='navbar navbar-expand-lg navbar-light bg-light'>
-      <a className='navbar-brand' href='#main'>
+      <a className='navbar-brand' href='/'>
         ISIS3710
       </a>
       <button
@@ -36,6 +39,11 @@ export const NavBar = () => {
             </Link>
           </li>
         </ul>
+        <form>
+          <div className="navbar-nav-controls">
+            <Link className="nav-link" to="/login">{user ? `Hello, ${user.name}`: 'Login' }</Link>
+          </div>
+        </form>
       </div>
     </nav>
   );

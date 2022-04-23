@@ -1,25 +1,19 @@
 import './App.scss';
-import { ContactForm } from './pages/ContactForm';
-import { NavBar } from './components/NavBar';
-import { Gallery } from './pages/Gallery';
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
-import { Products } from './pages/Products';
+import React,  {useState} from 'react'
+import { AppRouter } from './router/AppRouter';
+import { UserContext } from './context/UserContext';
 
 function App() {
+  
+  const [user, setUser] = useState(null);
+
   return (
     <>
-      <Router>
-        <NavBar></NavBar>
-        <Routes>
-          <Route exact path='/gallery' element={<Gallery></Gallery>} />
-          <Route
-            exact
-            path='/contact-form'
-            element={<ContactForm></ContactForm>}
-          />
-          <Route exact path='/products' element={<Products></Products>} />
-        </Routes>
-      </Router>
+      <main>
+      <UserContext.Provider value= {{user, setUser}}>
+        <AppRouter/>
+      </UserContext.Provider>
+    </main>
     </>
   );
 }
